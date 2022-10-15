@@ -16,22 +16,34 @@ let humidityOutput = document.querySelector('#humidity-value');
 let windOutput = document.querySelector('#wind-value');
 let pressureOut = document.querySelector('#pressure-value');
 
+let daysOfWeekOut = document.querySelectorAll('.day-of-week');
+let moreTemperatureOutputs = document.querySelectorAll('.temperature-value');
+let moreWeatherIcons = document.querySelectorAll('.more-weather-icon');
+let moreWeatherValues = document.querySelectorAll('.more-weather-value');
+let weatherBlocks = document.querySelectorAll('.weather-block');
+
 let city = "Poltava";
 getWeather(city);
-getDate();
+setInterval(getDate, 60000);
 let temperatureByCelsius;
 let temperatureByFahrenheit;
 let celsius = true;
+let newCityFlag = false;
+let lat;
+let lon;
 
 temperatureOutput.addEventListener('click', () => {
     if (celsius) {
-        temperatureOutput.textContent = temperatureByFahrenheit + "°";
+        temperatureOutput.textContent = temperatureByFahrenheit + "°F";
         celsius = false;
     } else {
-        temperatureOutput.textContent = temperatureByCelsius + "°";
+        temperatureOutput.textContent = temperatureByCelsius + "°C";
         celsius = true;
     }
-
+})
+cityInput.addEventListener('click', () => {
+    newCityFlag = true;
+    setTimeout(() => newCityFlag = false, 1000);
 })
 findBtn.addEventListener('click', () => {
     city = cityInput.value;
@@ -47,7 +59,9 @@ for (const chosenCity of chosenCities) {
     chosenCity.addEventListener('click', () => {
         city = chosenCity.textContent;
         getWeather(city);
-    })
+        newCityFlag = true;
+        setTimeout(() => newCityFlag = false, 1000);
+    });
 }
 
 function getWeather(city) {
@@ -55,11 +69,13 @@ function getWeather(city) {
     fetch(url)
         .then(response => response.json())
         .then(json => {
+            lat = json.coord.lat;
+            lon = json.coord.lon;
             cityOutput.textContent = json.name;
             temperatureByCelsius = (json.main.temp - 273.15).toFixed(1);
-            temperatureByFahrenheit = ((json.main.temp - 273.15) * (9/5) + 32).toFixed(1);
-            if (celsius ) temperatureOutput.textContent = temperatureByCelsius + "°";
-            else temperatureOutput.textContent = temperatureByFahrenheit + "°";
+            temperatureByFahrenheit = ((json.main.temp - 273.15) * (9 / 5) + 32).toFixed(1);
+            if (celsius) temperatureOutput.textContent = temperatureByCelsius + "°C";
+            else temperatureOutput.textContent = temperatureByFahrenheit + "°F";
 
             let weather = json.weather[0].main;
             switch (weather) {
@@ -94,12 +110,42 @@ function getWeather(city) {
             humidityOutput.textContent = json.main.humidity + "%";
             windOutput.textContent = json.wind.speed + "m/s";
             pressureOut.textContent = json.main.pressure + "hPa";
+
+            let urlExtra = "https://api.openweathermap.org/data/2.5/onecall?lat=" + `${lat}` + "&lon=" + `${lon}` + "&exclude=current,minutely,hourly&appid=bf35cac91880cb98375230fb443a116f&units=metric";
+            fetch(urlExtra)
+                .then(response => response.json())
+                .then(json => {
+                    for (let i = 1; i <= weatherBlocks.length; i++) {
+                        moreTemperatureOutputs[i - 1].textContent = (json.daily[i].temp.day).toFixed(1) + "°";
+                        let moreWeather = json.daily[i].weather[0].main;
+                        switch (moreWeather) {
+                            case "Clear":
+                                moreWeatherValues[i - 1].textContent = "Clear";
+                                moreWeatherIcons[i - 1].src = "images/icons/clear-icon.png";
+                                break;
+                            case "Clouds":
+                                moreWeatherValues[i - 1].textContent = "Cloudy";
+                                moreWeatherIcons[i - 1].src = "images/icons/cloudy-icon.png";
+                                break;
+                            case "Rain":
+                            case "Thunderstorm":
+                            case "Drizzle":
+                                moreWeatherValues[i - 1].textContent = "Rainy";
+                                moreWeatherIcons[i - 1].src = "images/icons/rainy-icon.png";
+                                break;
+                            case "Snow":
+                                moreWeatherValues[i - 1].textContent = "Snow";
+                                moreWeatherIcons[i - 1].src = "images/icons/snow-icon.png";
+                                break;
+                        }
+                    }
+                })
         })
     getDate();
 }
 
 function getDate() {
-    let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let months = ['Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     let date = new Date();
     let hours;
@@ -116,4 +162,45 @@ function getDate() {
 
     timeOutput.textContent = `${hours}:${minutes}`;
     dateOutput.textContent = `${dayOfWeek}, ${day} ${month} ${year}`;
+    for (let i = 1; i <= daysOfWeekOut.length; i++) {
+        daysOfWeekOut[i - 1].textContent = daysOfWeek[date.getDay()+i];
+    }
 }
+
+let rightSideBar = document.querySelector('.right-wrapper');
+let leftSideBar = document.querySelector('.left-wrapper');
+let mainInfo = document.querySelector('.main-info-wrapper');
+let leftPart = document.querySelector('.right-wrapper-left');
+let rightPart = document.querySelector('.right-wrapper-right');
+
+
+    rightSideBar.addEventListener('mouseover', () => {
+        rightSideBar.classList.add('right-wrapper-hovered');
+        leftSideBar.classList.add('left-wrapper-hovered');
+    });
+    findBtn.addEventListener('mouseover', () => {
+        rightSideBar.classList.add('right-wrapper-hovered');
+        leftSideBar.classList.add('left-wrapper-hovered');
+    });
+    rightSideBar.addEventListener('mouseout', () => {
+        rightSideBar.classList.remove('right-wrapper-hovered');
+        leftSideBar.classList.remove('left-wrapper-hovered');
+    });
+    findBtn.addEventListener('mouseout', () => {
+        rightSideBar.classList.remove('right-wrapper-hovered');
+        leftSideBar.classList.remove('left-wrapper-hovered');
+    });
+
+rightSideBar.addEventListener('click', () => {
+    if (!newCityFlag) {
+        rightSideBar.classList.toggle('right-wrapper-full');
+        leftSideBar.classList.toggle('left-wrapper-hidden');
+        leftPart.classList.toggle('right-wrapper-left-active');
+        rightPart.classList.toggle('right-wrapper-right-active');
+        mainInfo.classList.toggle('main-info-hidden');
+        for (const weatherBlock of weatherBlocks) {
+                weatherBlock.classList.toggle('hidden');
+                setTimeout(() => weatherBlock.classList.toggle('invisible'), 200);
+        }
+    }
+});
