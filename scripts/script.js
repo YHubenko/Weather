@@ -18,9 +18,20 @@ let pressureOut = document.querySelector('#pressure-value');
 
 let city = "Poltava";
 getWeather(city);
-let lat;
-let lon;
+let temperatureByCelsius;
+let temperatureByFahrenheit;
+let celsius = true;
 
+temperatureOutput.addEventListener('click', () => {
+    if (celsius) {
+        temperatureOutput.textContent = temperatureByFahrenheit + "°";
+        celsius = false;
+    } else {
+        temperatureOutput.textContent = temperatureByCelsius + "°";
+        celsius = true;
+    }
+
+})
 findBtn.addEventListener('click', () => {
     city = cityInput.value;
     getWeather(city);
@@ -43,22 +54,24 @@ function getWeather(city) {
     fetch(url)
         .then(response => response.json())
         .then(json => {
-            lat = json.coord.lat;
-            lon = json.coord.lon;
             cityOutput.textContent = json.name;
-            temperatureOutput.textContent = (json.main.temp - 273.15).toFixed(1) + "°";
+            temperatureByCelsius = (json.main.temp - 273.15).toFixed(1);
+            temperatureByFahrenheit = ((json.main.temp - 273.15) * (9/5) + 32).toFixed(1);
+            if (celsius ) temperatureOutput.textContent = temperatureByCelsius + "°";
+            else temperatureOutput.textContent = temperatureByFahrenheit + "°";
+
             let weather = json.weather[0].main;
             switch (weather) {
                 case "Clear":
                     weatherOut.textContent = "Clear";
                     weatherIcon.src = "images/icons/clear-icon.png";
-                    weatherApp.style.background = "url('images/bg/clear-bg.png')";
+                    weatherApp.style.background = "url('../images/bg/clear-bg.png')";
                     findBtn.style.background = "rgba(160, 228, 252, 0.75)";
                     break;
                 case "Clouds":
                     weatherOut.textContent = "Cloudy";
                     weatherIcon.src = "images/icons/cloudy-icon.png";
-                    weatherApp.style.background = "url('images/bg/cloudy-bg.png')";
+                    weatherApp.style.background = "url('../images/bg/cloudy-bg.png')";
                     findBtn.style.background = "rgba(240, 179, 125, 0.78)";
                     break;
                 case "Rain":
@@ -66,13 +79,13 @@ function getWeather(city) {
                 case "Drizzle":
                     weatherOut.textContent = "Rainy";
                     weatherIcon.src = "images/icons/rainy-icon.png";
-                    weatherApp.style.background = "url('images/bg/rainy-bg.png')";
+                    weatherApp.style.background = "url('../images/bg/rainy-bg.png')";
                     findBtn.style.background = "rgba(180, 176, 166, 0.82)";
                     break;
                 case "Snow":
                     weatherOut.textContent = "Snow";
                     weatherIcon.src = "images/icons/snow-icon.png";
-                    weatherApp.style.background = "url('images/bg/snow-bg.png')";
+                    weatherApp.style.background = "url('../images/bg/snow-bg.png')";
                     findBtn.style.background = "rgba(227, 237, 245, 0.86)";
                     break;
             }
