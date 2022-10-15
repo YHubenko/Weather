@@ -66,13 +66,13 @@ function getWeather(city) {
                 case "Clear":
                     weatherOut.textContent = "Clear";
                     weatherIcon.src = "images/icons/clear-icon.png";
-                    weatherApp.style.background = "url('../images/bg/clear-bg.png')";
+                    weatherApp.style.background = "url('images/bg/clear-bg.png')";
                     findBtn.style.background = "rgba(160, 228, 252, 0.75)";
                     break;
                 case "Clouds":
                     weatherOut.textContent = "Cloudy";
                     weatherIcon.src = "images/icons/cloudy-icon.png";
-                    weatherApp.style.background = "url('../images/bg/cloudy-bg.png')";
+                    weatherApp.style.background = "url('images/bg/cloudy-bg.png')";
                     findBtn.style.background = "rgba(240, 179, 125, 0.78)";
                     break;
                 case "Rain":
@@ -80,13 +80,13 @@ function getWeather(city) {
                 case "Drizzle":
                     weatherOut.textContent = "Rainy";
                     weatherIcon.src = "images/icons/rainy-icon.png";
-                    weatherApp.style.background = "url('../images/bg/rainy-bg.png')";
+                    weatherApp.style.background = "url('images/bg/rainy-bg.png')";
                     findBtn.style.background = "rgba(180, 176, 166, 0.82)";
                     break;
                 case "Snow":
                     weatherOut.textContent = "Snow";
                     weatherIcon.src = "images/icons/snow-icon.png";
-                    weatherApp.style.background = "url('../images/bg/snow-bg.png')";
+                    weatherApp.style.background = "url('images/bg/snow-bg.png')";
                     findBtn.style.background = "rgba(227, 237, 245, 0.86)";
                     break;
             }
