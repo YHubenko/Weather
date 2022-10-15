@@ -3,6 +3,7 @@
     padding: 0;
     font-family: 'Rubik', sans-serif;
     color: rgb(234, 235, 236);
+    transition: 0.5s;
 }
 body {
     width: 100vw;
