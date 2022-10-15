@@ -34,6 +34,9 @@ body {
 .temperature {
     font-size: 80px;
 }
+.temperature:hover {
+    cursor:pointer;
+}
 .city-date-holder {
     margin: 15px 0 0 15px;
 }
