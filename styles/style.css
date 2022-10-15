@@ -22,11 +22,11 @@ body {
 }
 
 .left-wrapper {
-    width: 560px;
+    width: 540px;
     height: 100%;
 }
 .left-wrapper-hovered {
-    width: 540px;
+    width: 530px;
 }
 .left-wrapper-hidden {
     width: 0;
@@ -71,14 +71,14 @@ body {
 }
 
 .right-wrapper {
-    width: 240px;
+    width: 260px;
     height: 400px;
     background-color: rgba(13, 18, 18, 0.65);
     backdrop-filter: blur(7px);
     padding: 50px;
 }
 .right-wrapper-hovered {
-    width: 260px;
+    width: 270px;
 }
 .right-wrapper-full {
     width: 800px;
