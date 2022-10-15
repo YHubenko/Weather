@@ -72,8 +72,8 @@ function getWeather(city) {
             lat = json.coord.lat;
             lon = json.coord.lon;
             cityOutput.textContent = json.name;
-            temperatureByCelsius = (json.main.temp - 273.15).toFixed(1);
-            temperatureByFahrenheit = ((json.main.temp - 273.15) * (9 / 5) + 32).toFixed(1);
+            temperatureByCelsius = (json.main.temp - 273.15).toFixed();
+            temperatureByFahrenheit = ((json.main.temp - 273.15) * (9 / 5) + 32).toFixed();
             if (celsius) temperatureOutput.textContent = temperatureByCelsius + "°C";
             else temperatureOutput.textContent = temperatureByFahrenheit + "°F";
 
@@ -116,7 +116,7 @@ function getWeather(city) {
                 .then(response => response.json())
                 .then(json => {
                     for (let i = 1; i <= weatherBlocks.length; i++) {
-                        moreTemperatureOutputs[i - 1].textContent = (json.daily[i].temp.day).toFixed(1) + "°";
+                        moreTemperatureOutputs[i - 1].textContent = (json.daily[i].temp.day).toFixed() + "°";
                         let moreWeather = json.daily[i].weather[0].main;
                         switch (moreWeather) {
                             case "Clear":
