@@ -95,19 +95,24 @@ function getWeather(city) {
             windOutput.textContent = json.wind.speed + "m/s";
             pressureOut.textContent = json.main.pressure + "hPa";
         })
+    getDate();
 }
 
 function getDate() {
     let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let months = ['Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     let date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let day = date.getUTCDay();
+    let hours;
+    if (String(date.getHours()).length === 1) hours = "0" + date.getHours();
+    else hours = date.getHours();
+    let minutes;
+    if (String(date.getMinutes()).length === 1) minutes = "0" + date.getMinutes();
+    else minutes = date.getMinutes();
+    let day = date.getUTCDate();
     let dayOfWeek = daysOfWeek[date.getDay()];
     let month = months[date.getMonth()];
     let fullYear = String(date.getFullYear());
-    let year = "`" + fullYear[2] + fullYear[3];
+    let year = "'" + fullYear[2] + fullYear[3];
 
     timeOutput.textContent = `${hours}:${minutes}`;
     dateOutput.textContent = `${dayOfWeek}, ${day} ${month} ${year}`;
