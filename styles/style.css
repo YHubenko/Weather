@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+    color: rgb(234, 235, 236);
+}
+body {
+    width: 100vw;
+    height: 90vh;
+    background: radial-gradient(rgb(9, 9, 9), rgb(36, 36, 36));
+}
+.weather-app {
+    height: 500px;
+    width: 900px;
+    background: rgba(129, 129, 129, 0.76);
+    margin: 60px auto;
+    box-shadow: 25px 40px 50px rgb(9, 9, 9);
+    display: flex;
+}
+
+.left-wrapper {
+    width: 60%;
+    height: 100%;
+}
+.main-info-wrapper {
+    margin: 300px 0;
+    padding: 20px 50px;
+    display: flex;
+    background: rgba(17, 18, 19, 0.47);
+    width: 81.5%;
+    color: rgb(56, 188, 253);
+}
+.temperature {
+    font-size: 80px;
+}
+.city-date-holder {
+    margin: 15px 0 0 15px;
+}
+.city-name {
+    font-size: 40px;
+}
+.date-and-time,
+.weather-condition {
+    font-size: 15px;
+    font-weight: 300;
+}
+.small-weather-wrapper {
+    margin: 17px 0 0 30px;
+}
+.weather-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.right-wrapper {
+    width: 29%;
+    height: 80%;
+    background-color: rgba(13, 18, 18, 0.65);
+    backdrop-filter: blur(7px);
+    padding: 50px;
+}
+.magnifier-block {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    margin-left: 830px;
+}
+.magnifier-block:hover {
+    cursor: pointer;
+}
+.magnifier-block img {
+    width: 20px;
+    height: 20px;
+    margin: 25px;
+}
+.divider,
+.small-divider {
+    height: 1px;
+    width: 100%;
+    background-color: #9b9b9b;
+    margin: 20px 0;
+}
+.small-divider {
+    width: 200px;
+    position: relative;
+    top: -8px;
+    margin: 0 0 20px 0;
+}
+.location,
+.weather-details {
+    font-weight: 300;
+}
+#another-location {
+    color: #b4b4b4;
+    font-size: 20px;
+    position: relative;
+    top: -10px;
+    height: 30px;
+    background: none;
+    border: none;
+    outline: none;
+}
+#another-location:hover {
+    cursor: text;
+}
+.chosen-cities {
+    color: #b4b4b4;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+.chosen-cities:hover {
+    cursor: pointer;
+    color: rgb(234, 235, 236);
+}
+#weather-details-title {
+    color: rgb(210, 210, 210);
+    font-size: 20px;
+    margin: 30px 0;
+}
+.weather-details-block {
+    width: 100%;
+    margin: 20px 0;
+}
+.weather-details-component {
+    color: #b4b4b4;
+}
+.weather-details-value {
+    color: rgb(210, 210, 210);
+    float: right;
+}
